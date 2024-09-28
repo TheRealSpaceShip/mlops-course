@@ -1,3 +1,6 @@
 .ipynb_checkpoints
 *.parquet
 *.pkl
+.venv
+mlruns
+artifacts

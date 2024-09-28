@@ -6,6 +6,7 @@ RUN apt-get clean --yes && \
     apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     curl \
+    git \
     # libgl1-mesa-glx \
     # libegl1-mesa \
     libxrandr2 \
@@ -27,6 +28,8 @@ RUN rm ~/miniconda3/miniconda.sh
 RUN eval "$(/$HOME/miniconda3/bin/conda shell.$SHELL hook)"
 
 RUN conda install --yes --quiet \
+    mlflow \
+    hyperopt \
     pandas \
     seaborn \
     matplotlib \
