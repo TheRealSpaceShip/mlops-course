@@ -21,11 +21,12 @@ RUN apt-get clean --yes && \
 
 USER ${NB_UID}
 
-RUN mkdir -p ~/miniconda3
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-RUN bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-RUN rm ~/miniconda3/miniconda.sh
-RUN eval "$(/$HOME/miniconda3/bin/conda shell.$SHELL hook)"
+ENV MINICONDA_PATH="$HOME/.miniconda3"
+RUN mkdir -p "$MINICONDA_PATH"
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O "$MINICONDA_PATH/miniconda.sh"
+RUN bash "$MINICONDA_PATH/miniconda.sh" -b -u -p "$MINICONDA_PATH"
+RUN rm "$MINICONDA_PATH/miniconda.sh"
+RUN eval "$($MINICONDA_PATH/bin/conda shell.$SHELL hook)"
 
 RUN conda install --yes --quiet \
     mlflow \
